@@ -1,7 +1,7 @@
 import { Page, Locator,expect,test } from '@playwright/test';
 // import { Page, Locator, } from '@playwright/test';
-import { config } from '../utils/config';
-import { HomePage } from '../pages/Homepageverification';
+import { config,config1 } from '../../utils/config';
+// import { HomePage } from '../pages/Homepageverification';
 export class LoginPage {
     private page: Page;
     private usernameInput: Locator;
@@ -58,7 +58,7 @@ export class LoginPage {
     }
 
     async open() {
-        await this.page.goto(config.baseURL);
+        await this.page.goto(config1.baseURL_OnPrem);
     }
 }
 

@@ -21,7 +21,7 @@ test.beforeAll(async () => {
 
 });
 
-test.describe.parallel('Somke_Tests ', () => {
+test.describe.parallel('Smoke_Tests ', () => {
 test('Verify home page functionality ', async () => {
    
     const homePage = new HomePage(page);

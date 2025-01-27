@@ -1,5 +1,6 @@
-import { Page, Locator,expect,test } from '@playwright/test';
-import { user } from '../utils/user';
+import { test, expect,Page, Browser, chromium, BrowserContext,Locator } from '@playwright/test';
+import {user} from "../../utils/user";
+// import { user } from '../../utils/user';
 const USER_ID = user.USER_ID;
 
     export class UserPage {
@@ -55,68 +56,71 @@ const USER_ID = user.USER_ID;
             this. File_based_encryption   = this.page.locator("//*[contains(text(),'File-based encryption')]")
             this. Connection   = this.page.locator("//*[contains(text(),'Connection')]")
             this. Save_and_Close = this.page.locator("//button[contains(text(),'Save & Close ')]")
-            this.Updated_successful_message = this.page.locator("//*[contains(text(),'Update successful.')]")
-            
-
-            
-
-
-
-           
+            this.Updated_successful_message = this.page.locator("//*[contains(text(),'Update successful.')]")           
 
 
      }
+                async   Adduser(){
+                await this.Users.isVisible();
+                await this.Users.click();
+                await this.SubUsers.isVisible();
+                await this.page.waitForTimeout(2000);
+                await this.SubUsers.dblclick();
+                await this.Add.isVisible();
+                await this.Add.click();
+                await this.USER_ID.isVisible();
+                await this.USER_ID.click();
+                await this.USER_ID.fill(user.USER_ID);
+                await this.First_Name.isVisible();
+                await this.First_Name.click();
+                await this.First_Name.fill(user.First_Name);
+                await this.Last_Name.isVisible();
+                await this.Last_Name.click();
+                await this.Last_Name.fill(user.Last_Name);
+                await this.Email_Address.isVisible();
+                await this.Email_Address.click();
+                await this.Email_Address.fill(user.Email_Address);
+                // await this.page.waitForTimeout(2000);
+                // await this.CreatePassword.isVisible();
+                if (await this.CreatePassword.isVisible()) {
+                    // Check the radio button
+                    await this.CreatePassword.check();
+                  } else {
+                    console.error('Radio button is not visible');
+                  }
+                // await this.CreatePassword.check();
+                await this.page.waitForTimeout(2000);
+                await this.Security_warning.isVisible()
+                await this.Security_warning_message.isVisible()
+                // await this.page.waitForTimeout(2000);
+                await this.Ok_Button.isVisible();
+                await this.Ok_Button.click();
+                await this.Password.isVisible();
+                await this.Password.click();
+                await this.Password.fill(user.Password);
+                await this.Confirmpassword.isVisible();
+                await this.Confirmpassword.click();
+                await this.Confirmpassword.fill(user.Confirmpassword);
+                await this.Add_to_user_list.isVisible();
+                await this.Add_to_user_list.click();
+                // await this.page.waitForTimeout(2000);
+                await this.Create.isVisible();
+                await this.Create.click();
+                // await this.Updated_successful_message.isVisible();
+                // await expect(this.Updated_successful_message).toBeVisible();
+                // Ensure the element containing the exact text "Update successful." is visible
+                // await expect(this.page.locator('text=Update successful.')).toBeVisible({ timeout: 3000 });
+                const message = await this.page.locator('text=add successful.').textContent({ timeout: 3000 });
+                if (message) {
+                  console.log('Captured message:', message.trim());
+                } else {
+                  console.log('Message was not visible in time.');
+                }
 
-          
 
-            // async Adduser(){
-            //     await this.Users.isVisible();
-            //     await this.Users.click();
-            //     await this.SubUsers.isVisible();
-            //     await this.page.waitForTimeout(2000);
-            //     await this.SubUsers.dblclick();
-            //     await this.Add.isVisible();
-            //     await this.Add.click();
-            //     await this.USER_ID.isVisible();
-            //     await this.USER_ID.click();
-            //     await this.USER_ID.fill(user.USER_ID);
-            //     await this.First_Name.isVisible();
-            //     await this.First_Name.click();
-            //     await this.First_Name.fill(user.First_Name);
-            //     await this.Last_Name.isVisible();
-            //     await this.Last_Name.click();
-            //     await this.Last_Name.fill(user.Last_Name);
-            //     await this.Email_Address.isVisible();
-            //     await this.Email_Address.click();
-            //     await this.Email_Address.fill(user.Email_Address);
-            //     // await this.page.waitForTimeout(2000);
-            //     // await this.CreatePassword.isVisible();
-            //     if (await this.CreatePassword.isVisible()) {
-            //         // Check the radio button
-            //         await this.CreatePassword.check();
-            //       } else {
-            //         console.error('Radio button is not visible');
-            //       }
-            //     // await this.CreatePassword.check();
-            //     await this.page.waitForTimeout(2000);
-            //     await this.Security_warning.isVisible()
-            //     await this.Security_warning_message.isVisible()
-            //     // await this.page.waitForTimeout(2000);
-            //     await this.Ok_Button.isVisible();
-            //     await this.Ok_Button.click();
-            //     await this.Password.isVisible();
-            //     await this.Password.click();
-            //     await this.Password.fill(user.Password);
-            //     await this.Confirmpassword.isVisible();
-            //     await this.Confirmpassword.click();
-            //     await this.Confirmpassword.fill(user.Confirmpassword);
-            //     await this.Add_to_user_list.isVisible();
-            //     await this.Add_to_user_list.click();
-            //     // await this.page.waitForTimeout(2000);
-            //     await this.Create.isVisible();
-            //     await this.Create.click();
+
                 
-            // }
+            }
 
             getUserLocator(USER_ID: string): Locator {
                 const dynamicXPath = `//div//td[contains(text(),'${USER_ID}')]`;

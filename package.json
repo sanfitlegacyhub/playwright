@@ -7,6 +7,7 @@
     "test": "tests"
   },
   "scripts": {
+    
     "test:parallel": "playwright test --config=playwright.parallel.config.ts",
     "test:sequential": "playwright test --config=playwright.sequential.config.ts",
     "test:all": "run-s test:parallel-and-sequential",
